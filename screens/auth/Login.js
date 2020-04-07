@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 // import Constants from 'expo-constants';
 import { Block, Text, Input, Button } from '../../components';
 import Logo from '../../assets/images/Base/Logo.png';
+import { colors } from '../../constants/theme';
 
 const Login = () => {
   // const headerHeight = useHeaderHeight();
@@ -14,7 +15,7 @@ const Login = () => {
       style={{ flex: 1 }}
       behavior={Platform.Os == 'ios' ? 'padding' : 'height'} //'height'
     >
-      <Block center middle>
+      <Block center middle style={{ backgroundColor: colors.white }}>
         <Block middle>
           <Image source={Logo} style={{ height: 28, width: 102 }} />
         </Block>

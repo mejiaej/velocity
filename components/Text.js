@@ -17,6 +17,7 @@ const Typography = ({
   caption,
   medium,
   bold,
+  light,
   italic,
   button,
   style,
@@ -56,6 +57,8 @@ const Typography = ({
     caption && styles.caption,
     caption && medium && styles.captionMedium,
     button && styles.button,
+    bold && styles.bold,
+    light && styles.light,
     style,
   ];
 
@@ -68,12 +71,14 @@ const Typography = ({
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'Rubik-Light',
+    fontFamily: 'Rubik-Regular',
     fontSize: sizes.font,
     color: colors.black,
   },
+  bold: { fontFamily: 'Rubik-Bold' },
+  light: { fontFamily: 'Rubik-Light' },
   center: {
-    alignItems: 'center',
+    textAlign: 'center',
   },
   blue: { color: colors.blue },
   lightblue: { color: colors.lightblue },

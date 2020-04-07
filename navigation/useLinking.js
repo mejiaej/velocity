@@ -4,7 +4,7 @@ import { Linking } from 'expo';
 export default function(containerRef) {
   return useLinking(containerRef, {
     prefixes: [Linking.makeUrl('/')],
-    config: {
+    /*config: {
       Root: {
         path: 'root',
         screens: {
@@ -13,6 +13,6 @@ export default function(containerRef) {
           Settings: 'settings',
         },
       },
-    },
+    }, */
   });
 }

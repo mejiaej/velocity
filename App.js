@@ -1,67 +1,70 @@
-import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Platform, View, StatusBar, StyleSheet } from 'react-native';
+import { Asset } from 'expo-asset';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-import BottomTabNavigator from './navigation/BottomTabNavigator';
-import useLinking from './navigation/useLinking';
+import Auth from './navigation/Auth';
+import Screens from './navigation/Screens';
 
-const Stack = createStackNavigator();
+const App = ({ skipLoadingScreen }) => {
+  const loggedIn = false;
+  const [isLoadingComplete, setLoadingComplete] = useState(false);
 
-export default function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = React.useState(false);
-  const [initialNavigationState, setInitialNavigationState] = React.useState();
-  const containerRef = React.useRef();
-  const { getInitialState } = useLinking(containerRef);
-
-  // Load any resources or data that we need prior to rendering the app
-  React.useEffect(() => {
-    async function loadResourcesAndDataAsync() {
+  useEffect(() => {
+    const loadResourcesAndDataAsync = async () => {
       try {
         SplashScreen.preventAutoHide();
-
-        // Load our initial navigation state
-        setInitialNavigationState(await getInitialState());
+        await Asset.loadAsync([
+          require('./assets/images/Base/Logo.png'),
+          require('./assets/images/Base/Logo2x.png'),
+          require('./assets/images/Base/Logo3x.png'),
+        ]);
 
         // Load fonts
         await Font.loadAsync({
-          ...Ionicons.font,
-          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+          'Rubik-Black': require('./assets/fonts/Rubik-Black.ttf'),
+          'Rubik-BlackItalic': require('./assets/fonts/Rubik-BlackItalic.ttf'),
+          'Rubik-Bold': require('./assets/fonts/Rubik-Bold.ttf'),
+          'Rubik-BoldItalic': require('./assets/fonts/Rubik-BoldItalic.ttf'),
+          'Rubik-Italic': require('./assets/fonts/Rubik-Italic.ttf'),
+          'Rubik-Light': require('./assets/fonts/Rubik-Light.ttf'),
+          'Rubik-LightItalic': require('./assets/fonts/Rubik-LightItalic.ttf'),
+          'Rubik-Medium': require('./assets/fonts/Rubik-Medium.ttf'),
+          'Rubik-MediumItalic': require('./assets/fonts/Rubik-MediumItalic.ttf'),
+          'Rubik-Regular': require('./assets/fonts/Rubik-Regular.ttf'),
         });
-      } catch (e) {
-        // We might want to provide this error information to an error reporting service
-        console.warn(e);
+      } catch (error) {
+        console.warn(error);
       } finally {
         setLoadingComplete(true);
         SplashScreen.hide();
       }
-    }
+    };
 
     loadResourcesAndDataAsync();
   }, []);
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
+  if (!isLoadingComplete && !skipLoadingScreen) {
     return null;
   } else {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-          <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
-          </Stack.Navigator>
+        <NavigationContainer>
+          {loggedIn ? <Screens /> : <Auth />}
         </NavigationContainer>
       </View>
     );
   }
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
   },
 });
+
+export default App;

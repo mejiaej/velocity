@@ -10,6 +10,7 @@ const Block = ({
   children,
   color,
   space,
+  right,
   ...rest
 }) => {
   const blockStyles = [
@@ -21,6 +22,7 @@ const Block = ({
     middle && styles.middle, // main axis
     color && { backgroundColor: color },
     space && { justifyContent: `space-${space}` },
+    right && styles.right,
     style,
   ];
   return (
@@ -42,6 +44,9 @@ const styles = StyleSheet.create({
   },
   middle: {
     justifyContent: 'center',
+  },
+  right: {
+    justifyContent: 'flex-end',
   },
 });
 

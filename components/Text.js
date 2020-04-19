@@ -4,6 +4,7 @@ import { sizes, fonts, colors } from '../constants/theme';
 
 const Typography = ({
   center,
+  right,
   color,
   size,
   height,
@@ -26,6 +27,17 @@ const Typography = ({
 }) => {
   const textStyles = [
     styles.text,
+    h1 && styles.h1,
+    h2 && styles.h2,
+    h3 && styles.h3,
+    h4 && styles.h4,
+    paragraph && styles.paragraph,
+    paragraph && color === 'gray' && styles.paragraphGray,
+    paragraph && color === 'gray2' && styles.paragraphGray2,
+    paragraph && color === 'gray3' && styles.paragraphGray3,
+    caption && styles.caption,
+    caption && medium && styles.captionMedium,
+    button && styles.button,
     color && { color },
     color && color === 'blue' && styles.blue,
     color && color === 'lightblue' && styles.lightblue,
@@ -42,23 +54,13 @@ const Typography = ({
     color && color === 'gray3' && styles.gray3,
     color && color === 'caption' && styles.caption,
     size && { fontSize: size },
+    bold && styles.bold,
+    light && styles.light,
     height && { lineHeight: height },
     weight && { fontWeight: weight },
     spacing && { letterSpacing: spacing },
     center && styles.center,
-    h1 && styles.h1,
-    h2 && styles.h2,
-    h3 && styles.h3,
-    h4 && styles.h4,
-    paragraph && styles.paragraph,
-    paragraph && color === 'gray' && styles.paragraphGray,
-    paragraph && color === 'gray2' && styles.paragraphGray2,
-    paragraph && color === 'gray3' && styles.paragraphGray3,
-    caption && styles.caption,
-    caption && medium && styles.captionMedium,
-    button && styles.button,
-    bold && styles.bold,
-    light && styles.light,
+    right && styles.right,
     style,
   ];
 
@@ -79,6 +81,9 @@ const styles = StyleSheet.create({
   light: { fontFamily: 'Rubik-Light' },
   center: {
     textAlign: 'center',
+  },
+  right: {
+    textAlign: 'right',
   },
   blue: { color: colors.blue },
   lightblue: { color: colors.lightblue },

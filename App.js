@@ -9,7 +9,7 @@ import Auth from './navigation/Auth';
 import Screens from './navigation/Screens';
 
 const App = ({ skipLoadingScreen }) => {
-  const loggedIn = false;
+  const loggedIn = true;
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   useEffect(() => {

@@ -5,10 +5,18 @@ import { useNavigation } from '@react-navigation/native';
 import { Block, Text, Input, Button } from '../../components';
 import Logo from '../../assets/images/Base/Logo.png';
 import { colors } from '../../constants/theme';
+import { useDispatch } from 'react-redux';
+import { setLoggedIn } from '../../redux/actions';
 
 const Login = () => {
   // const headerHeight = useHeaderHeight();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const handleLogin = () => {
+    dispatch(setLoggedIn());
+  };
+
   return (
     <KeyboardAvoidingView
       // keyboardVerticalOffset={Constants.statusBarHeight + headerHeight}
@@ -48,11 +56,7 @@ const Login = () => {
               label="Password"
               password
             />
-            <Button
-              full
-              onPress={() => console.log('click')}
-              style={{ marginBottom: 12 }}
-            >
+            <Button full onPress={handleLogin} style={{ marginBottom: 12 }}>
               <Text
                 weight="bold"
                 center

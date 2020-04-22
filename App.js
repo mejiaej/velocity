@@ -7,10 +7,13 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Auth from './navigation/Auth';
 import Screens from './navigation/Screens';
+import { useSelector } from 'react-redux';
 
 const App = ({ skipLoadingScreen }) => {
-  const loggedIn = true;
+  // const loggedIn = false;
   const [isLoadingComplete, setLoadingComplete] = useState(false);
+
+  const loggedIn = useSelector(({ Authentication }) => Authentication.loggedIn);
 
   useEffect(() => {
     const loadResourcesAndDataAsync = async () => {
